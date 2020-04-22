@@ -54,7 +54,7 @@ function initializeLoans() {
 
 function create_UUID() {
   var dt = new Date().getTime();
-  var uuid = "xxxxxxxxxxxx-xxxxx-4xxx-yxxx-xxxxxxxx".replace(/[xy]/g, function(c) {
+  const uuid = "xxxxxxxxxxxx-xxxxx-4xxx-yxxx-xxxxxxxx".replace(/[xy]/g, function(c) {
     var r = (dt + Math.random() * 16)%16 | 0;
     dt = Math.floor(dt/16);
     return (c == 'x' ? r : (r&0x3|0x8)).toString(16);
@@ -72,9 +72,9 @@ function bindLoansToDropDown() {
   dropDown.appendChild(element);
 
   for (var i = 0; i < LoanApplicationList.length; i++) {
-    var loanAppList = LoanApplicationList[i];
+    let loanAppList = LoanApplicationList[i];
 
-    var el = document.createElement('option');
+    let el = document.createElement('option');
     el.textContent = "Application of " + loanAppList.ApplicantName;
     el.value = loanAppList.Id.toString();
     dropDown.appendChild(el);
@@ -89,10 +89,9 @@ function loadApplication() {
 
   if (findLoanApp != undefined) {
 
-    var isEmployed = findLoanApp.Factors[0];
-    var hasKids = findLoanApp.Factors[1];
-    var hasLoans = findLoanApp.Factors[2];
-    var hastCreditCards = findLoanApp.Factors[3];
+    // Destructuring Arrays
+    
+    var[isEmployed, hasKids, hasLoans, hastCreditCards] = findLoanApp.Factors;
 
    document.getElementById('inputName').value = findLoanApp.ApplicantName;
    document.getElementById('inputDoBMonth').value = findLoanApp.ApplicantDateOfBirth.getMonth() + 1 ;
